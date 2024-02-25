@@ -27,8 +27,7 @@ import Swal from 'sweetalert2'
                     icon: 'error',
                     confirmButtonText: 'OK'
                 })
-            }
-            
+            } 
         }
 
         function mostrarEventos() {
@@ -67,7 +66,6 @@ import Swal from 'sweetalert2'
             eventos = eventos.filter(evento => evento.id !== id)
             const botonAgregar = document.querySelector(`[data-id="${id}"]`)
             botonAgregar.disabled = false
-            
             mostrarEventos()
         }
 

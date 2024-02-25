@@ -3,6 +3,7 @@
 namespace Model;
 
 class Usuario extends ActiveRecord {
+
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin'];
 
@@ -15,11 +16,9 @@ class Usuario extends ActiveRecord {
     public $confirmado;
     public $token;
     public $admin;
-
     public $password_actual;
     public $password_nuevo;
 
-    
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null;
@@ -33,7 +32,6 @@ class Usuario extends ActiveRecord {
         $this->admin = $args['admin'] ?? 0;
     }
 
-    // Validar el Login de Usuarios
     public function validarLogin() {
         if(!$this->email) {
             self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
@@ -48,7 +46,6 @@ class Usuario extends ActiveRecord {
 
     }
 
-    // Validación para cuentas nuevas
     public function validar_cuenta() {
         if(!$this->nombre) {
             self::$alertas['error'][] = 'El Nombre es Obligatorio';
@@ -71,7 +68,6 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
-    // Valida un email
     public function validarEmail() {
         if(!$this->email) {
             self::$alertas['error'][] = 'El Email es Obligatorio';
@@ -82,7 +78,6 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
-    // Valida el Password 
     public function validarPassword() {
         if(!$this->password) {
             self::$alertas['error'][] = 'El Password no puede ir vacio';
@@ -106,17 +101,14 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
-    // Comprobar el password
     public function comprobar_password() : bool {
         return password_verify($this->password_actual, $this->password );
     }
 
-    // Hashea el password
     public function hashPassword() : void {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    // Generar un Token
     public function crearToken() : void {
         $this->token = uniqid();
     }

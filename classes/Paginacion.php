@@ -3,6 +3,7 @@
 namespace Classes;
 
 class Paginacion {
+
     public $pagina_actual;
     public $registros_por_pagina;
     public $total_registros;
@@ -55,8 +56,7 @@ class Paginacion {
                 $html .= "<span class=\"paginacion__enlace paginacion__enlace--actual \">{$i}</span>";
             } else {
                 $html .= "<a class=\"paginacion__enlace paginacion__enlace--numero \" href=\"?page={$i}\">{$i}</a>";
-            }
-            
+            }    
         }
         return $html;
     }
@@ -72,6 +72,4 @@ class Paginacion {
         }
         return $html;
     }
-
-    
 }

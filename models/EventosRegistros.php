@@ -3,6 +3,7 @@
 namespace Model;
 
 class EventosRegistros extends ActiveRecord {
+    
     protected static $tabla = 'eventos_registros';
     protected static $columnasDB = ['id', 'evento_id', 'registro_id'];
 

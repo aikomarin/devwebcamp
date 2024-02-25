@@ -19,7 +19,6 @@ class DashboardController {
         // Calcular los ingresos
         $virtuales = Registro::total('paquete_id', 2);
         $presenciales = Registro::total('paquete_id', 1);
-
         $ingresos = ($virtuales * 46.41) + ($presenciales * 189.54);
 
         // Obtener eventos con + y - lugares disponibles

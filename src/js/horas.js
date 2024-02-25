@@ -2,8 +2,6 @@
     const horas = document.querySelector('#horas');
 
     if(horas) {
-        
-
         const categoria = document.querySelector('[name="categoria_id"]');
         const dias = document.querySelectorAll('[name="dia"]');
         const inputHiddenDia = document.querySelector('[name="dia_id"]');
@@ -34,6 +32,7 @@
             // Reiniciar campos ocultos y selector de horas
             inputHiddenHora.value = '';
             inputHiddenDia.value = '';
+
             const horaPrevia = document.querySelector('.horas__hora--seleccionada');
             if(horaPrevia) {
                 horaPrevia.classList.remove('horas__hora--seleccionada');
@@ -71,7 +70,6 @@
 
             const horasDisponibles = document.querySelectorAll('#horas li:not(.horas__hora--deshabilitada)');
             horasDisponibles.forEach(hora => hora.addEventListener('click', seleccionarHora));
-            // console.log(url);
         }
 
         function seleccionarHora(e) {
@@ -80,13 +78,13 @@
             if(horaPrevia) {
                 horaPrevia.classList.remove('horas__hora--seleccionada');
             }
+            
             // Agregar clase de seleccionado
             e.target.classList.add('horas__hora--seleccionada');
             inputHiddenHora.value = e.target.dataset.horaId;
 
             // LLenar campo oculto de día
             inputHiddenDia.value = document.querySelector('[name="dia"]:checked').value;
-            // console.log();
         }
     }
 })();

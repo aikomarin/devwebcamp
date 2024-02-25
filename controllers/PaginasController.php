@@ -10,10 +10,12 @@ use Model\Ponente;
 use Model\Categoria;
 
 class PaginasController {
-    public static function index(Router $router) {
-        $eventos = Evento::ordenar('hora_id','ASC');
 
+    public static function index(Router $router) {
+        // Mostrar los eventos
+        $eventos = Evento::ordenar('hora_id','ASC');
         $eventos_formateados = [];
+
         foreach($eventos as $evento) {
             $evento->categoria = Categoria::find($evento->categoria_id);
             $evento->dia = Dia::find($evento->dia_id);
@@ -42,9 +44,7 @@ class PaginasController {
         $conferencias_total = Evento::total('categoria_id', 1);
         $workshops_total = Evento::total('categoria_id', 2);
 
-        // Obtener todos los ponentes
-        $ponentes = Ponente::all();
-
+        $ponentes = Ponente::all(); // Obtener todos los ponentes
 
         $router->render('paginas/index', [
             'titulo' => 'Inicio',
@@ -70,8 +70,8 @@ class PaginasController {
 
     public static function conferencias(Router $router) {
         $eventos = Evento::ordenar('hora_id','ASC');
-
         $eventos_formateados = [];
+
         foreach($eventos as $evento) {
             $evento->categoria = Categoria::find($evento->categoria_id);
             $evento->dia = Dia::find($evento->dia_id);
@@ -94,7 +94,6 @@ class PaginasController {
                 $eventos_formateados['workshops_s'][] = $evento;
             }
         }
-        // debuguear($eventos_formateados);
 
         $router->render('paginas/conferencias', [
             'titulo' => 'Conferencias & Workshops',
@@ -103,7 +102,6 @@ class PaginasController {
     }
 
     public static function error(Router $router) {
-        
         $router->render('paginas/error', [
             'titulo' => 'Página no encontrada',
         ]);

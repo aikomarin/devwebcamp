@@ -52,7 +52,7 @@ class RegistroController {
                 return;
             }
         
-            $token = substr(md5(uniqid(rand(), true)), 0, 8);
+            $token = substr(md5(uniqid(rand(), true)), 0, 8); // Hacer eñ token más corto
 
             // Crear registro
             $datos = [
@@ -63,7 +63,7 @@ class RegistroController {
             ];
 
             $registro = new Registro($datos);
-            $resultado =$registro->guardar();
+            $resultado = $registro->guardar();
 
             if($resultado) {
                 header('Location: /boleto?id=' . urlencode($registro->token));
@@ -117,7 +117,7 @@ class RegistroController {
 
             try {
                 $registro = new Registro($datos);
-                $resultado =$registro->guardar();
+                $resultado = $registro->guardar();
                 echo json_encode($resultado);
             } catch (\Throwable $th){
                 echo json_encode([
@@ -184,7 +184,7 @@ class RegistroController {
         // Manejar el registro mediante $_POST
         if($_SERVER['REQUEST_METHOD'] === 'POST') { 
             if(!isAuth()) {
-                header('Location: /login'); // Revisar que el usuario esté autenticado
+                header('Location: /login');
                 return;
             }
 
@@ -215,6 +215,7 @@ class RegistroController {
             }
 
             foreach($eventos_array as $evento) {
+                // Registrar en DB la disponibilidad 
                 $evento->disponibles -= 1;
                 $evento->guardar();
 
@@ -231,6 +232,7 @@ class RegistroController {
             // Almacenar regalo
             $registro->sincronizar(['regalo_id' => $_POST['regalo_id']]);
             $resultado = $registro->guardar();
+            
             if($resultado) {
                 echo json_encode([
                     'resultado' => $resultado, 

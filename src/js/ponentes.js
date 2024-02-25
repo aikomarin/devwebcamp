@@ -12,7 +12,6 @@
 
         if(ponenteHidden.value) {
             (async () => {
-                
                 const ponente = await obtenerPonente(ponenteHidden.value);
                 const {nombre, apellido} = ponente;
                 const ponenteDOM = document.createElement('LI');
@@ -94,7 +93,6 @@
             }
             ponente.classList.add('listado-ponentes__ponente--seleccionado')
             ponenteHidden.value = ponente.dataset.ponenteId;
-            
         }
     }
 })();
